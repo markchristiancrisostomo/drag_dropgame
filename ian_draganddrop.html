@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .draggableContainer,
+        .droppableContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box,
+        .droppable {
+            background-color: #c0d8c0;
+            height: 30px;
+            width: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            position: relative;
+            z-index: 2;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+            border: 2px solid white;
+        }
+
+        .box:hover,
+        .droppable:hover {
+            background-color: #c1cd97;
+        }
+
+        .droppable {
+            background-color: #e1efca;
+        }
+
+        .draggableFormat {
+            font-weight: bold;
+            color: green;
+            border: 5px solid white;
+        }
+
+        #scoreSection {
+            z-index: 1;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: black;
+            background-color: #cdeecd;
+            padding: 20px;
+            font-weight: bolder;
+            border: 2px solid black;
+            border-radius: 10px;
+
+        }
+
+        #remarksDiv {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f1f7b5;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bolder;
+            border: 2px solid black;
+
+        }
+        img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #333;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease;
+}
+
+img:hover {
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1); 
+
+}    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="draggableContainer">
+            <div class="box" draggable="true" id="drag1">Apple</div>
+            <div class="box" draggable="true" id="drag2">Banana</div>
+            <div class="box" draggable="true" id="drag3">Cat</div>
+            <div class="box" draggable="true" id="drag4">Dog</div>
+            <div class="box" draggable="true" id="drag5">Egg</div>
+            <div class="box" draggable="true" id="drag5">Fish</div>
+            <div class="box" draggable="true" id="drag6">Goat</div>
+            <div class="box" draggable="true" id="drag7">Hand</div>
+            <div class="box" draggable="true" id="drag8">Ice</div>
+            <div class="box" draggable="true" id="drag9">Jam</div>
+        </div>
+
+        <div class="droppableContainer">
+            <div class="image1"><img src="Pre-school game/apple.jpg" alt="">
+            <div class="droppable" id="drop1" data-draggable-id="drop1">A</div>
+        </div>
+
+        <div class="image1"><img src="Pre-school game/banana.jpg" alt="">
+            <div class="droppable" id="drop2" data-draggable-id="drop2">B</div>
+        </div>
+
+        <div class="image1"><img src="https://img.freepik.com/free-vector/cute-cat-with-love-sign-hand-cartoon-illustration-animal-nature-concept-isolated-flat-cartoon-style_138676-3419.jpg?size=338&ext=jpg&ga=GA1.1.1412446893.1704844800&semt=ais" alt="">
+            <div class="droppable" id="drop3" data-draggable-id="drop3">C</div>
+        </div>
+        <div class="image1"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvuhKtOCYz8anhXHjMLk7UsXJbYh3ijJFC_g_FUWFIQPBDlvagGC2x-FgIn4ek2S9gdj0&usqp=CAU" alt="">
+            <div class="droppable" id="drop4" data-draggable-id="drop4">D</div>
+        </div>
+
+        <div class="image1"><img src="https://t4.ftcdn.net/jpg/02/67/29/69/360_F_267296968_5QDkMFamVh1IoUWn9zRAJsMOTtpcbkDW.jpg" alt="">
+
+            <div class="droppable" id="drop5" data-draggable-id="drop5">E</div>
+        </div>
+
+        <div class="image1"><img src="https://us.123rf.com/450wm/jameelnoman730/jameelnoman7302309/jameelnoman730230902657/213973768-cute-3d-cartoon-fish-a-colorful-underwater-character.jpg?ver=6" alt="">
+            <div class="droppable" id="drop5" data-draggable-id="drop5">F</div>
+        </div>
+
+        <div class="image1"><img src="https://i.pinimg.com/736x/ac/7d/64/ac7d6445f63722dbe371a6a733bbe519.jpg" alt="">
+
+            <div class="droppable" id="drop5" data-draggable-id="drop5">G</div>
+        </div>
+
+        <div class="image1"><img src="https://t4.ftcdn.net/jpg/01/21/94/15/360_F_121941587_8jCD12LfEwmoLKDY2RXuiEdZRxtI5PL4.jpg" alt="">
+
+            <div class="droppable" id="drop5" data-draggable-id="drop5">H</div>
+        </div>
+        <div class="image1"><img src="https://c8.alamy.com/comp/2B7FRC0/stack-of-ice-cubes-isolated-on-white-background-vector-cartoon-close-up-illustration-2B7FRC0.jpg" alt="">
+
+            <div class="droppable" id="drop5" data-draggable-id="drop5">I</div>
+        </div>
+
+        <div class="image1"><img src="https://st.depositphotos.com/1557418/1846/v/950/depositphotos_18467407-stock-illustration-strawberry-jam.jpg" alt="">
+
+            <div class="droppable" id="drop5" data-draggable-id="drop5">J</div>
+        </div>
+        </div>
+    </div>
+
+    <div id="remarksDiv"></div>
+    <div id="scoreSection">Score: <span id="scoreValue">0</span></div>
+
+    <script>
+        const draggableElement = document.querySelectorAll('.box');
+        const droppableElement = document.querySelectorAll('.droppable');
+        const remarksDiv = document.getElementById('remarksDiv');
+        let score = 0;
+
+        draggableElement.forEach(element => {
+            element.addEventListener('dragstart', (drgStrt) => {
+                drgStrt.dataTransfer.setData('text', drgStrt.target.id);
+                drgStrt.currentTarget.classList.add('draggableFormat');
+            });
+
+            element.addEventListener('dragend', (drgendEvt) => {
+                drgendEvt.currentTarget.classList.remove('draggableFormat');
+            });
+        });
+
+        droppableElement.forEach(element => {
+            element.addEventListener('dragover', (dragOver) => {
+                dragOver.preventDefault();
+            });
+
+            element.addEventListener('drop', (dropEvt) => {
+                dropEvt.preventDefault();
+                const droppedElementId = dropEvt.dataTransfer.getData('text');
+                const dropZoneId = dropEvt.target.getAttribute('data-draggable-id');
+                const droppedElement = document.getElementById(droppedElementId);
+
+                dropEvt.target.appendChild(droppedElement);
+
+                if (dropZoneId === droppedElementId.replace('drag', 'drop')) {
+                    score++;
+                    remarksDiv.innerText = 'Correct';
+                    scoreSection.innerText = `Score: ${score}`;
+                } else {
+                    remarksDiv.innerText = 'Incorrect';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
